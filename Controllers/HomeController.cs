@@ -17,7 +17,7 @@ namespace Autofac.Demo.Controllers
 
         public IActionResult Index()
         {
-            _dataManager.Initialize();
+            ViewData["Message"] = _dataManager.GetMessage();
             return View();
         }
 

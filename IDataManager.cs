@@ -2,6 +2,6 @@
 {
     public interface IDataManager
     {
-        public void Initialize();
+        public string GetMessage();
     }
 }

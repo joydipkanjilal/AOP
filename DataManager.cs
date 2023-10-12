@@ -2,8 +2,9 @@
 {
     public class DataManager : IDataManager
     {
-        public void Initialize()
+        public string GetMessage()
         {
+            return "Hello World";
         }
     }
 }
