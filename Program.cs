@@ -1,5 +1,4 @@
 using Autofac.Demo;
-using Autofac.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container

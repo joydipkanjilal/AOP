@@ -9,12 +9,15 @@ namespace Autofac.Demo
         : base(options)
         {
         }
+
         protected override void OnConfiguring
        (DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseInMemoryDatabase(databaseName: "ProductDb");
         }
+
         public DbSet<Product> Products { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Product>().HasData(

@@ -6,10 +6,12 @@ namespace Autofac.Demo
     public class MemoryCacheInterceptor : IInterceptor
     {
         private readonly IMemoryCache _memoryCache;
+
         public MemoryCacheInterceptor(IMemoryCache memoryCache)
         {
             _memoryCache = memoryCache;
         }
+
         public void Intercept(IInvocation invocation)
         {
             var declaringType = invocation.Method.DeclaringType;

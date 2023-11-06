@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace Autofac.Demo.Controllers
@@ -7,28 +6,27 @@ namespace Autofac.Demo.Controllers
     public class ProductController : Controller
     {
         private readonly IProductRepository _productRepository;
+
         public ProductController(IProductRepository productRepository, IMemoryCache memoryCache)
         {
             _productRepository = productRepository;
         }
+
         public ActionResult Index()
         {
             return View(_productRepository.GetAll());
         }
 
-        // GET: ProductController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: ProductController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: ProductController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -43,13 +41,11 @@ namespace Autofac.Demo.Controllers
             }
         }
 
-        // GET: ProductController/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: ProductController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -64,13 +60,11 @@ namespace Autofac.Demo.Controllers
             }
         }
 
-        // GET: ProductController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: ProductController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
