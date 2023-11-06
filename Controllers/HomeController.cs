@@ -7,17 +7,14 @@ namespace Autofac.Demo.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IDataManager _dataManager;
-
-        public HomeController(ILogger<HomeController> logger, IDataManager dataManager)
+        public HomeController(ILogger<HomeController> logger)
         {
-            _dataManager = dataManager;
             _logger = logger;
         }
 
         public IActionResult Index()
         {
-            ViewData["Message"] = _dataManager.GetMessage();
+            ViewData["Message"] = "Products";
             return View();
         }
 
