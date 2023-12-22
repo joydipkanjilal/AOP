@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "w9EiGfdVmih6HO724DmG/he34/nLG1XQe34jhVyt53bqnNfcM9YwB7e+0jLaLPrP+ZjtsquxusbwmOIx/S3eZw==",
+  "success": true,
+  "projectFilePath": "D:\\Courses\\Educative\\Source\\AOP\\PostSharp.Exception.Demo\\PostSharp.Exception.Demo.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Joydip Kanjilal\\.nuget\\packages\\postsharp\\2023.0.8\\postsharp.2023.0.8.nupkg.sha512",
+    "C:\\Users\\Joydip Kanjilal\\.nuget\\packages\\postsharp.redist\\2023.0.8\\postsharp.redist.2023.0.8.nupkg.sha512"
+  ],
+  "logs": []
+}
