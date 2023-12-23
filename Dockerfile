@@ -16,4 +16,4 @@ RUN     wget https://packages.microsoft.com/config/debian/11/packages-microsoft-
 RUN     curl -fsSL https://deb.nodesource.com/setup_14.x | bash - && \
         apt-get install -y nodejs
 
-RUN     git clone https://github.com/joydipkanjilal/postsharp.starter
+RUN     git clone --branch postsharp.starter https://github.com/joydipkanjilal/aop.git
