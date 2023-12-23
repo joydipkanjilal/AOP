@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="bin\Debug\net8.0\appsettings.Development.json" />
+    <Content Include="bin\Debug\net8.0\appsettings.json" />
+    <Content Include="bin\Debug\net8.0\PostSharp.Demo.deps.json" />
+    <Content Include="bin\Debug\net8.0\PostSharp.Demo.runtimeconfig.json" />
+    <Content Include="bin\Debug\net8.0\PostSharp.Demo.staticwebassets.runtime.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="PostSharp" Version="2024.0.4-rc" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bin\Debug\net8.0\PostSharp.Demo.dll" />
+    <None Include="bin\Debug\net8.0\PostSharp.Demo.exe" />
+    <None Include="bin\Debug\net8.0\PostSharp.Demo.pdb" />
+    <None Include="bin\Debug\net8.0\PostSharp.Demo.pspdb" />
+    <None Include="bin\Debug\net8.0\PostSharp.Demo.pssym" />
+    <None Include="bin\Debug\net8.0\PostSharp.dll" />
+  </ItemGroup>
+
+</Project>
