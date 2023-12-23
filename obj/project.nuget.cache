@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "fGu0c8PaXUi6eWasomAJoaUQz5wTeRToprwW0Zek6nMTQRUY6vTcon56RtQumbxboEnN0b9pB8GpbpY5lCvIFA==",
+  "success": true,
+  "projectFilePath": "D:\\Courses\\Educative\\Code\\Postsharp.Starter\\Postsharp.Starter.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Joydip Kanjilal\\.nuget\\packages\\postsharp\\2024.0.4-rc\\postsharp.2024.0.4-rc.nupkg.sha512",
+    "C:\\Users\\Joydip Kanjilal\\.nuget\\packages\\postsharp.redist\\2024.0.4-rc\\postsharp.redist.2024.0.4-rc.nupkg.sha512"
+  ],
+  "logs": []
+}
