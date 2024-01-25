@@ -1,6 +1,11 @@
+using MVC.Demo;
+using MVC.Demo.Challenge;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
