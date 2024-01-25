@@ -20,9 +20,11 @@ namespace MVC.Demo
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Customer>().HasData(
-            new Customer { Id = 1, FirstName = "Joydip", LastName = "Kanjilal", Address = "Hyderabad, India", Phone = "1234567890" },
-            new Customer { Id = 2, FirstName = "Steve", LastName = "Smith", Address = "Chicago, USA", Phone = "5566778899" },
-            new Customer { Id = 3, FirstName = "Debanjan", LastName = "Banerjee", Address = "Kolkata, India", Phone = "0987654321" });
+            new Customer { Id = 1, FirstName = "Joseph", LastName = "Harris", Address = "Wairere Road, Canberra", Phone = "9234567890" },
+            new Customer { Id = 2, FirstName = "Steve", LastName = "Smith", Address = "Arbutus Drive, Chicago", Phone = "5566778899" },
+            new Customer { Id = 3, FirstName = "Eduardo", LastName = "Kinney", Address = "Southlands Road, London", Phone = "0987654321" },
+            new Customer { Id = 4, FirstName = "George", LastName = "Nelson", Address = "Cedar Drive, Boston", Phone = "8926778899" },
+            new Customer { Id = 5, FirstName = "Jennie", LastName = "Martinez", Address = "Woodrow Way, Houston", Phone = "6188954321" });
         }
     }
 }
