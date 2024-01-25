@@ -16,4 +16,4 @@ RUN     wget https://packages.microsoft.com/config/debian/11/packages-microsoft-
 RUN     curl -fsSL https://deb.nodesource.com/setup_14.x | bash - && \
         apt-get install -y nodejs
 
-RUN     git clone https://github.com/joydipkanjilal/MVC.Demo.Challenge
+RUN     git clone --branch mvc.demo.challenge https://github.com/joydipkanjilal/AOP.git
