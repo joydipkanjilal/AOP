@@ -1,0 +1,6 @@
+@HelloWorld.MinimalAPI_HostAddress = http://localhost:5255
+
+GET {{HelloWorld.MinimalAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
