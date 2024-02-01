@@ -5,14 +5,14 @@ namespace Autofac.Challenge.MethodDuration.Demo
 {
     public class MethodDurationInterceptor : IInterceptor
     {
-        TextWriter writer;
-        public MethodDurationInterceptor(TextWriter writer)
+        //TextWriter writer;
+        public MethodDurationInterceptor(/*TextWriter writer*/)
         {
-            if (writer == null)
-            {
-                throw new ArgumentNullException(nameof(writer));
-            }
-            this.writer = writer;
+            //if (writer == null)
+            //{
+            //    throw new ArgumentNullException(nameof(writer));
+            //}
+            //this.writer = writer;
         }
 
         public void Intercept(IInvocation invocation)
@@ -28,7 +28,7 @@ namespace Autofac.Challenge.MethodDuration.Demo
 
             //After method execution
             stopwatch.Stop();
-            writer.WriteLine(
+            Console.WriteLine(
                 "MeasureDurationInterceptor: {0} executed in {1} milliseconds.",
                 invocation.MethodInvocationTarget.Name,
                 stopwatch.Elapsed.TotalMilliseconds.ToString("0.000")
