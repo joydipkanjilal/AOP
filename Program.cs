@@ -6,6 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 var app = ContainerHelper.BuildContainer(builder);
 
+app.MapGet("/", () => "Hello World!");
+
 app.MapGet("/getemployees", (IDataRepository dataRepository) =>
 {
     return dataRepository.GetEmployees();
