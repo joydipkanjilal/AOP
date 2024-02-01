@@ -1,0 +1,6 @@
+@Autofac.Challenge.MethodExecutionDuration.Demo_HostAddress = http://localhost:5290
+
+GET {{Autofac.Challenge.MethodExecutionDuration.Demo_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

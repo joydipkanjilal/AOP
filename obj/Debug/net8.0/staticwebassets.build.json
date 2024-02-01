@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "7dvQeCr56XUaB1YYQAbuxFFUIXUKz9R1c5m5mLiKJDY=",
+  "Source": "Autofac.Challenge.MethodExecutionDuration.Demo",
+  "BasePath": "_content/Autofac.Challenge.MethodExecutionDuration.Demo",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

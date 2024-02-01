@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "n0eHv/QssjJAs3U0wIEBQCh3h412/kjFaJDmmOiGA5w5djLDXlwET8GQUrvPDY44JnSLo8r0/uouFSkSKS8guA==",
+  "success": true,
+  "projectFilePath": "D:\\Courses\\Educative\\Backup\\Autofac.Challenge.MethodExecutionDuration.Demo\\Autofac.Challenge.MethodExecutionDuration.Demo.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Joydip Kanjilal\\.nuget\\packages\\autofac\\8.0.0\\autofac.8.0.0.nupkg.sha512",
+    "C:\\Users\\Joydip Kanjilal\\.nuget\\packages\\autofac.extensions.dependencyinjection\\9.0.0\\autofac.extensions.dependencyinjection.9.0.0.nupkg.sha512",
+    "C:\\Users\\Joydip Kanjilal\\.nuget\\packages\\autofac.extras.dynamicproxy\\7.1.0\\autofac.extras.dynamicproxy.7.1.0.nupkg.sha512",
+    "C:\\Users\\Joydip Kanjilal\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",
+    "C:\\Users\\Joydip Kanjilal\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\Joydip Kanjilal\\.nuget\\packages\\system.diagnostics.diagnosticsource\\7.0.2\\system.diagnostics.diagnosticsource.7.0.2.nupkg.sha512",
+    "C:\\Users\\Joydip Kanjilal\\.nuget\\packages\\system.diagnostics.eventlog\\6.0.0\\system.diagnostics.eventlog.6.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
