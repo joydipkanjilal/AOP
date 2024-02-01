@@ -33,6 +33,8 @@ namespace Autofac.Challenge.MethodDuration.Demo
                 invocation.MethodInvocationTarget.Name,
                 stopwatch.Elapsed.TotalMilliseconds.ToString("0.000")
                 );
+
+            writer.Flush();
         }
     }
 }
