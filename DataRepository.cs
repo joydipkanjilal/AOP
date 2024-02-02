@@ -8,7 +8,8 @@
         public string? Address { get; set; }
         public decimal Salary { get; set; }
     }
-    public class DataRepository: IDataRepository
+
+    public class DataRepository : IDataRepository
     {
         private readonly List<Employee> employees = new List<Employee>{
                 new Employee
@@ -32,9 +33,10 @@
                     Id = 5, FirstName = "David", LastName = "Hurst", Address = "Birmingham", Salary = 5500
                 }
             };
-        public List<Employee> GetEmployees() 
-        { 
-            return employees; 
+
+        public List<Employee> GetEmployees()
+        {
+            return employees;
         }
     }
 }

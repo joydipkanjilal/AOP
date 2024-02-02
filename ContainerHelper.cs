@@ -10,7 +10,7 @@ namespace Autofac.Challenge.MethodDuration.Demo
             builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory()).
 
                 ConfigureContainer<ContainerBuilder>(builder =>
-                {                    
+                {
                     builder.Register(i => new MethodDurationInterceptor(Console.Out));
                     //builder.RegisterType<MethodDurationInterceptor>();
                     builder.RegisterType<DataRepository>()
