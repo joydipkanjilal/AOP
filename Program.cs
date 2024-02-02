@@ -5,29 +5,30 @@ using System.Threading.RateLimiting;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRateLimiter(_ => _
-    .AddFixedWindowLimiter(policyName: "fixed", options =>
-    {
-        options.PermitLimit = 1;
-        options.Window = TimeSpan.FromSeconds(10);
-        options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
-        options.QueueLimit = 1;
-    }));
+//builder.Services.AddRateLimiter(_ => _
+//    .AddFixedWindowLimiter(policyName: "fixed", options =>
+//    {
+//        options.PermitLimit = 1;
+//        options.Window = TimeSpan.FromSeconds(10);
+//        options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+//        options.QueueLimit = 1;
+//    }));
 
 
 var app = ContainerHelper.BuildContainer(builder);
-app.UseRateLimiter();
+//app.UseRateLimiter();
 
 app.MapGet("/", () => "Hello World!");
 
 //if(!Constants.Flag)
 //{
-    app.MapGet("/getemployees", (IDataRepository dataRepository) =>
+    app.MapGet("/getemployees", (IDataRepository dataRepository, CancellationToken token) =>
     {
+        Task.Delay(1000, token);
         return dataRepository.GetEmployees();
-    }).RequireRateLimiting("fixed");
+    })/*.RequireRateLimiting("fixed")*/;
 
-    Constants.Flag = true;
+    //Constants.Flag = true;
 //}
 
 app.Run();
