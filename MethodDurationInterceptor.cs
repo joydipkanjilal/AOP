@@ -6,7 +6,7 @@ namespace Autofac.Challenge.MethodDuration.Demo
     public class MethodDurationInterceptor : IInterceptor
     {
         private TextWriter writer;
-
+        private static object lockObj = new object();
         public MethodDurationInterceptor(TextWriter writer)
         {
             if (writer == null)
@@ -18,23 +18,27 @@ namespace Autofac.Challenge.MethodDuration.Demo
 
         public void Intercept(IInvocation invocation)
         {
-            var declaringType = invocation.Method.DeclaringType;
-            var methodName = invocation.Method.Name;
+            lock(lockObj)
+            {
 
-            //Before method execution
-            var stopwatch = Stopwatch.StartNew();
+                var declaringType = invocation.Method.DeclaringType;
+                var methodName = invocation.Method.Name;
 
-            //Executing the actual method
-            invocation.Proceed();
+                //Before method execution
+                var stopwatch = Stopwatch.StartNew();
 
-            //After method execution
-            stopwatch.Stop();
+                //Executing the actual method
+                invocation.Proceed();
 
-            writer.WriteLine(
-                "The method {0} was executed in {1} milliseconds.",
-                invocation.MethodInvocationTarget.Name,
-                stopwatch.Elapsed.TotalMilliseconds.ToString("0.000")
-                );
+                //After method execution
+                stopwatch.Stop();
+
+                writer.WriteLine(
+                    "The method {0} was executed in {1} milliseconds.",
+                    invocation.MethodInvocationTarget.Name,
+                    stopwatch.Elapsed.TotalMilliseconds.ToString("0.000")
+                    );
+            }
         }
     }
 }
