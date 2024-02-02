@@ -59,16 +59,16 @@ builder.Services.AddRateLimiter(rateLimiterOptions =>
 
 var app = ContainerHelper.BuildContainer(builder);
 app.UseRateLimiter();
-//app.MapGet("/", () => "Hello World!");
+app.MapGet("/getemployees", () => Console.WriteLine("Hello World!"));
 
 
 //if(!Constants.Flag)
 //{
-    app.MapGet("/getemployees", (IDataRepository dataRepository/*, CancellationToken token*/) =>
-    {
-        //Task.Delay(1000, token);
-        return dataRepository.GetEmployees();
-    }).RequireRateLimiting("token");
+    //app.MapGet("/getemployees", (IDataRepository dataRepository/*, CancellationToken token*/) =>
+    //{
+    //    //Task.Delay(1000, token);
+    //    return dataRepository.GetEmployees();
+    //}).RequireRateLimiting("token");
 
 //Constants.Flag = true;
 //}
