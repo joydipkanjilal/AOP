@@ -29,18 +29,18 @@ var builder = WebApplication.CreateBuilder(args);
 //    });
 //});
 
-builder.Services.AddRateLimiter(rateLimiterOptions =>
-{
-    rateLimiterOptions.AddTokenBucketLimiter("token", options =>
-    {
-        options.TokenLimit = 1;
-        options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
-        options.QueueLimit = 1;
-        options.ReplenishmentPeriod = TimeSpan.FromSeconds(30);
-        options.TokensPerPeriod = 1;
-        options.AutoReplenishment = true;
-    });
-});
+//builder.Services.AddRateLimiter(rateLimiterOptions =>
+//{
+//    rateLimiterOptions.AddTokenBucketLimiter("token", options =>
+//    {
+//        options.TokenLimit = 1;
+//        options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+//        options.QueueLimit = 1;
+//        options.ReplenishmentPeriod = TimeSpan.FromSeconds(30);
+//        options.TokensPerPeriod = 1;
+//        options.AutoReplenishment = true;
+//    });
+//});
 
 
 //builder.Services.AddRateLimiter(options =>
@@ -56,6 +56,20 @@ builder.Services.AddRateLimiter(rateLimiterOptions =>
 //        options.AutoReplenishment = true;
 //    });
 //});
+
+builder.Services.AddRateLimiter(options =>
+{
+    options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(httpContext =>
+        RateLimitPartition.GetFixedWindowLimiter(
+            partitionKey: httpContext.User.Identity?.Name ?? httpContext.Request.Headers.Host.ToString(),
+            factory: partition => new FixedWindowRateLimiterOptions
+            {
+                AutoReplenishment = true,
+                PermitLimit = 1,
+                QueueLimit = 0,
+                Window = TimeSpan.FromMinutes(1)
+            }));
+});
 
 var app = ContainerHelper.BuildContainer(builder);
 app.UseRateLimiter();
