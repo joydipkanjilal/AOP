@@ -4,16 +4,30 @@ using Microsoft.Extensions.Options;
 using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
-var concurrencyPolicy = "Concurrency";
-builder.Services.AddRateLimiter(rateLimiterOptions =>
-{
-    rateLimiterOptions.RejectionStatusCode = 429;
+builder.Services.AddControllers();
 
-    rateLimiterOptions.AddConcurrencyLimiter(policyName: concurrencyPolicy, options =>
-    {
-        options.PermitLimit = 1;
+//var concurrencyPolicy = "Concurrency";
+//builder.Services.AddRateLimiter(rateLimiterOptions =>
+//{
+//    rateLimiterOptions.RejectionStatusCode = 429;
+
+//    rateLimiterOptions.AddConcurrencyLimiter(policyName: concurrencyPolicy, options =>
+//    {
+//        options.PermitLimit = 1;
+//        options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+//        options.QueueLimit = 1;
+//    });
+//});
+
+builder.Services.AddRateLimiter(options => {
+    options.RejectionStatusCode = 429;
+    options.AddTokenBucketLimiter(policyName: "token", options => {
+        options.TokenLimit = 1;
         options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
         options.QueueLimit = 1;
+        options.ReplenishmentPeriod = TimeSpan.FromSeconds(10);
+        options.TokensPerPeriod = 1;
+        options.AutoReplenishment = true;
     });
 });
 
@@ -27,9 +41,15 @@ app.MapGet("/", () => "Hello World!");
     {
         //Task.Delay(100, token);
         return dataRepository.GetEmployees();
-    }).RequireRateLimiting(concurrencyPolicy);
+    }).RequireRateLimiting("token");
 
-    //Constants.Flag = true;
+//Constants.Flag = true;
 //}
+
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
+app.MapControllers();
 
 app.Run();
