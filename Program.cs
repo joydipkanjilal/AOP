@@ -7,32 +7,34 @@ using System.Threading.RateLimiting;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
-builder.Services.AddRateLimiter(_ => _
-    .AddFixedWindowLimiter(policyName: "fixed", options =>
-    {
-        options.PermitLimit = 1;
-        options.Window = TimeSpan.FromSeconds(30);
-        options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
-        options.QueueLimit = 1;
-
-    }));
-
-//var concurrencyPolicy = "Concurrency";
-//builder.Services.AddRateLimiter(rateLimiterOptions =>
-//{
-//    rateLimiterOptions.RejectionStatusCode = 429;
-
-//    rateLimiterOptions.AddConcurrencyLimiter(policyName: concurrencyPolicy, options =>
+//builder.Services.AddRateLimiter(_ => _
+//    .AddFixedWindowLimiter(policyName: "fixed", options =>
 //    {
 //        options.PermitLimit = 1;
+//        options.Window = TimeSpan.FromSeconds(30);
 //        options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
 //        options.QueueLimit = 1;
-//    });
-//});
 
-//builder.Services.AddRateLimiter(options => {
+//    }));
+
+var concurrencyPolicy = "concurrency";
+builder.Services.AddRateLimiter(rateLimiterOptions =>
+{
+    rateLimiterOptions.RejectionStatusCode = 429;
+
+    rateLimiterOptions.AddConcurrencyLimiter(policyName: concurrencyPolicy, options =>
+    {
+        options.PermitLimit = 1;
+        options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+        options.QueueLimit = 1;
+    });
+});
+
+//builder.Services.AddRateLimiter(options =>
+//{
 //    options.RejectionStatusCode = 429;
-//    options.AddTokenBucketLimiter(policyName: "token", options => {
+//    options.AddTokenBucketLimiter(policyName: "token", options =>
+//    {
 //        options.TokenLimit = 1;
 //        options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
 //        options.QueueLimit = 1;
@@ -53,7 +55,7 @@ app.UseRateLimiter();
     {
         //Task.Delay(100, token);
         return dataRepository.GetEmployees();
-    }).RequireRateLimiting("fixed");
+    }).RequireRateLimiting("concurrency");
 
 //Constants.Flag = true;
 //}
