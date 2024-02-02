@@ -58,7 +58,7 @@ builder.Services.AddRateLimiter(rateLimiterOptions =>
 //});
 
 var app = ContainerHelper.BuildContainer(builder);
-//app.UseRateLimiter();
+app.UseRateLimiter();
 //app.MapGet("/", () => "Hello World!");
 
 
