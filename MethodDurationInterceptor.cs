@@ -5,6 +5,17 @@ namespace Autofac.Challenge.MethodDuration.Demo
 {
     public class MethodDurationInterceptor : IInterceptor
     {
+        private TextWriter writer;
+
+        public MethodDurationInterceptor(TextWriter writer)
+        {
+            if (writer == null)
+            {
+                throw new ArgumentNullException(nameof(writer));
+            }
+            this.writer = writer;
+        }
+
         public void Intercept(IInvocation invocation)
         {
             var declaringType = invocation.Method.DeclaringType;
@@ -19,7 +30,7 @@ namespace Autofac.Challenge.MethodDuration.Demo
             //After method execution
             stopwatch.Stop();
 
-            Console.WriteLine(
+            writer.WriteLine(
                 "The method {0} was executed in {1} milliseconds.",
                 invocation.MethodInvocationTarget.Name,
                 stopwatch.Elapsed.TotalMilliseconds.ToString("0.000")
