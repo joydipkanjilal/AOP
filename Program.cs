@@ -11,7 +11,7 @@ builder.Services.AddRateLimiter(_ => _
     .AddFixedWindowLimiter(policyName: "fixed", options =>
     {
         options.PermitLimit = 1;
-        options.Window = TimeSpan.FromSeconds(15);
+        options.Window = TimeSpan.FromSeconds(30);
         options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
         options.QueueLimit = 1;
 
@@ -43,7 +43,7 @@ builder.Services.AddRateLimiter(_ => _
 //});
 
 var app = ContainerHelper.BuildContainer(builder);
-
+app.UseRateLimiter();
 //app.MapGet("/", () => "Hello World!");
 
 

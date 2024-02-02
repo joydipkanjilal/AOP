@@ -7,7 +7,7 @@ namespace Autofac.Challenge.MethodDuration.Demo.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [EnableRateLimiting("Concurrency")]
+    //[EnableRateLimiting("Concurrency")]
     public class EmployeeController : ControllerBase
     {
         private readonly IDataRepository _dataRepository;
