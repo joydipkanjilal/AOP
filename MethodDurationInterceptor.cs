@@ -5,21 +5,9 @@ namespace Autofac.Challenge.MethodDuration.Demo
 {
     public class MethodDurationInterceptor : IInterceptor
     {
-        //private TextWriter writer;
-        private static object lockObj = new object();
-        //public MethodDurationInterceptor(TextWriter writer)
-        //{
-        //    if (writer == null)
-        //    {
-        //        throw new ArgumentNullException(nameof(writer));
-        //    }
-        //    this.writer = writer;
-        //}
-
         public void Intercept(IInvocation invocation)
         {
-            lock(lockObj)
-            {
+
                 var declaringType = invocation.Method.DeclaringType;
                 var methodName = invocation.Method.Name;
 
@@ -37,7 +25,7 @@ namespace Autofac.Challenge.MethodDuration.Demo
                     invocation.MethodInvocationTarget.Name,
                     stopwatch.Elapsed.TotalMilliseconds.ToString("0.000")
                     );
-            }
+         
         }
     }
 }
