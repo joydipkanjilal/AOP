@@ -11,7 +11,8 @@ namespace Autofac.Challenge.MethodDuration.Demo
 
                 ConfigureContainer<ContainerBuilder>(builder =>
                 {
-                    builder.Register(i => new MethodDurationInterceptor(Console.Out));
+                    //builder.Register(i => new MethodDurationInterceptor(Console.Out));
+                    builder.RegisterType<MethodDurationInterceptor>();
                     builder.RegisterType<DataRepository>()
                     .As<IDataRepository>()
                     .InstancePerLifetimeScope()
