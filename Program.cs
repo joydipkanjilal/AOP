@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddControllers();
+//builder.Services.AddControllers();
 
 //builder.Services.AddRateLimiter(_ => _
 //    .AddFixedWindowLimiter(policyName: "fixed", options =>
@@ -14,21 +14,34 @@ builder.Services.AddControllers();
 //        options.Window = TimeSpan.FromSeconds(30);
 //        options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
 //        options.QueueLimit = 1;
-
 //    }));
 
-var concurrencyPolicy = "concurrency";
+//var concurrencyPolicy = "concurrency";
+//builder.Services.AddRateLimiter(rateLimiterOptions =>
+//{
+//    rateLimiterOptions.RejectionStatusCode = 429;
+
+//    rateLimiterOptions.AddConcurrencyLimiter(policyName: concurrencyPolicy, options =>
+//    {
+//        options.PermitLimit = 1;
+//        options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+//        options.QueueLimit = 1;
+//    });
+//});
+
 builder.Services.AddRateLimiter(rateLimiterOptions =>
 {
-    rateLimiterOptions.RejectionStatusCode = 429;
-
-    rateLimiterOptions.AddConcurrencyLimiter(policyName: concurrencyPolicy, options =>
+    rateLimiterOptions.AddTokenBucketLimiter("token", options =>
     {
-        options.PermitLimit = 1;
+        options.TokenLimit = 1;
         options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
         options.QueueLimit = 1;
+        options.ReplenishmentPeriod = TimeSpan.FromSeconds(30);
+        options.TokensPerPeriod = 1;
+        options.AutoReplenishment = true;
     });
 });
+
 
 //builder.Services.AddRateLimiter(options =>
 //{
@@ -51,19 +64,19 @@ var app = ContainerHelper.BuildContainer(builder);
 
 //if(!Constants.Flag)
 //{
-    app.MapGet("/getemployees", (IDataRepository dataRepository, CancellationToken token) =>
+    app.MapGet("/getemployees", (IDataRepository dataRepository/*, CancellationToken token*/) =>
     {
-        Task.Delay(1000, token);
+        //Task.Delay(1000, token);
         return dataRepository.GetEmployees();
-    });
+    }).RequireRateLimiting("token");
 
 //Constants.Flag = true;
 //}
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
-app.UseAuthorization();
+//app.UseAuthorization();
 
-app.MapControllers();
+//app.MapControllers();
 
 app.Run();
