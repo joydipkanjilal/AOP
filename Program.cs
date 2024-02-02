@@ -43,46 +43,46 @@ var builder = WebApplication.CreateBuilder(args);
 //});
 
 
-//builder.Services.AddRateLimiter(options =>
-//{
-//    options.RejectionStatusCode = 429;
-//    options.AddTokenBucketLimiter(policyName: "token", options =>
-//    {
-//        options.TokenLimit = 1;
-//        options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
-//        options.QueueLimit = 1;
-//        options.ReplenishmentPeriod = TimeSpan.FromSeconds(10);
-//        options.TokensPerPeriod = 1;
-//        options.AutoReplenishment = true;
-//    });
-//});
-
 builder.Services.AddRateLimiter(options =>
 {
-    options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(httpContext =>
-        RateLimitPartition.GetFixedWindowLimiter(
-            partitionKey: httpContext.User.Identity?.Name ?? httpContext.Request.Headers.Host.ToString(),
-            factory: partition => new FixedWindowRateLimiterOptions
-            {
-                AutoReplenishment = true,
-                PermitLimit = 1,
-                QueueLimit = 0,
-                Window = TimeSpan.FromMinutes(1)
-            }));
+    options.RejectionStatusCode = 429;
+    options.AddTokenBucketLimiter(policyName: "token", options =>
+    {
+        options.TokenLimit = 1;
+        options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+        options.QueueLimit = 0;
+        options.ReplenishmentPeriod = TimeSpan.FromSeconds(10);
+        options.TokensPerPeriod = 1;
+        options.AutoReplenishment = false;
+    });
 });
+
+//builder.Services.AddRateLimiter(options =>
+//{
+//    options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(httpContext =>
+//        RateLimitPartition.GetFixedWindowLimiter(
+//            partitionKey: httpContext.User.Identity?.Name ?? httpContext.Request.Headers.Host.ToString(),
+//            factory: partition => new FixedWindowRateLimiterOptions
+//            {
+//                AutoReplenishment = true,
+//                PermitLimit = 1,
+//                QueueLimit = 0,
+//                Window = TimeSpan.FromMinutes(1)
+//            }));
+//});
 
 var app = ContainerHelper.BuildContainer(builder);
 app.UseRateLimiter();
-app.MapGet("/getemployees", () => Console.WriteLine("Hello World!"));
+app.MapGet("/getemployees", () => Console.WriteLine("Hello World!")).RequireRateLimiting("token");
 
 
 //if(!Constants.Flag)
 //{
-    //app.MapGet("/getemployees", (IDataRepository dataRepository/*, CancellationToken token*/) =>
-    //{
-    //    //Task.Delay(1000, token);
-    //    return dataRepository.GetEmployees();
-    //}).RequireRateLimiting("token");
+//app.MapGet("/getemployees", (IDataRepository dataRepository/*, CancellationToken token*/) =>
+//{
+//    //Task.Delay(1000, token);
+//    return dataRepository.GetEmployees();
+//}).RequireRateLimiting("token");
 
 //Constants.Flag = true;
 //}
