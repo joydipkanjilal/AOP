@@ -1,32 +1,33 @@
 using Autofac.Challenge.MethodDuration.Demo;
 using Microsoft.AspNetCore.RateLimiting;
+using Microsoft.Extensions.Options;
 using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
+var concurrencyPolicy = "Concurrency";
+builder.Services.AddRateLimiter(rateLimiterOptions =>
+{
+    rateLimiterOptions.RejectionStatusCode = 429;
 
-// Add services to the container.
-//builder.Services.AddRateLimiter(_ => _
-//    .AddFixedWindowLimiter(policyName: "fixed", options =>
-//    {
-//        options.PermitLimit = 1;
-//        options.Window = TimeSpan.FromSeconds(10);
-//        options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
-//        options.QueueLimit = 1;
-//    }));
-
+    rateLimiterOptions.AddConcurrencyLimiter(policyName: concurrencyPolicy, options =>
+    {
+        options.PermitLimit = 1;
+        options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+        options.QueueLimit = 1;
+    });
+});
 
 var app = ContainerHelper.BuildContainer(builder);
-//app.UseRateLimiter();
 
 app.MapGet("/", () => "Hello World!");
 
 //if(!Constants.Flag)
 //{
-    app.MapGet("/getemployees", (IDataRepository dataRepository, CancellationToken token) =>
+    app.MapGet("/getemployees", (IDataRepository dataRepository/*, CancellationToken token*/) =>
     {
-        Task.Delay(1000, token);
+        //Task.Delay(100, token);
         return dataRepository.GetEmployees();
-    })/*.RequireRateLimiting("fixed")*/;
+    }).RequireRateLimiting(concurrencyPolicy);
 
     //Constants.Flag = true;
 //}
