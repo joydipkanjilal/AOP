@@ -45,17 +45,17 @@ builder.Services.AddRateLimiter(rateLimiterOptions =>
 //});
 
 var app = ContainerHelper.BuildContainer(builder);
-app.UseRateLimiter();
+//app.UseRateLimiter();
 //app.MapGet("/", () => "Hello World!");
 
 
 //if(!Constants.Flag)
 //{
-    app.MapGet("/getemployees", (IDataRepository dataRepository/*, CancellationToken token*/) =>
+    app.MapGet("/getemployees", (IDataRepository dataRepository, CancellationToken token) =>
     {
-        //Task.Delay(100, token);
+        Task.Delay(1000, token);
         return dataRepository.GetEmployees();
-    }).RequireRateLimiting("concurrency");
+    });
 
 //Constants.Flag = true;
 //}
