@@ -1,6 +1,7 @@
 using Autofac.Challenge.MethodDuration.Demo;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.Extensions.Options;
+using System.Runtime.CompilerServices;
 using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -34,6 +35,7 @@ builder.Services.AddRateLimiter(options => {
 var app = ContainerHelper.BuildContainer(builder);
 
 app.MapGet("/", () => "Hello World!");
+
 
 //if(!Constants.Flag)
 //{
