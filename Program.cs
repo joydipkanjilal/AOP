@@ -10,11 +10,11 @@ builder.Services.AddRateLimiter(options =>
     options.AddTokenBucketLimiter(policyName: "token", options =>
     {
         options.TokenLimit = 1;
-        options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
-        options.QueueLimit = 0;
-        options.ReplenishmentPeriod = TimeSpan.FromSeconds(2);
+        //options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+        //options.QueueLimit = 0;
+        options.ReplenishmentPeriod = TimeSpan.FromSeconds(5);
         options.TokensPerPeriod = 1;
-        options.AutoReplenishment = false;
+        //options.AutoReplenishment = true;
     });
 });
 
